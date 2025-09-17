@@ -1,0 +1,71 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+#div_Moldura_Site{
+    position: relative;
+    display: inline-block;
+}
+
+#img_Moldura_Site{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+#conteudo_Site{
+    position: absolute;
+    top: 47%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 94vw;
+    height: 85vh;
+
+    display: flex;              /* usa flex para centralizar conteúdo */
+    flex-direction: column;     /* empilha os elementos */
+    justify-content: flex-start;/* começa de cima mas dentro do centro */
+    align-items: center;        /* centraliza horizontalmente */
+
+    z-index: 1;
+    background-color: #F4DFC1;  /* cor da sua pokédex */
+    overflow: hidden;           /* evita barra desnecessária */
+}
+
+#img_perfil{
+    position: absolute;
+    bottom: 25px;
+    left: 80px;
+    width: 37px;
+    height: 37px;
+}
+
+#img_menu{
+    position: absolute;
+    bottom: 16px;
+    right: 60px;
+    width: 87px;
+    height: 66px;
+}
+
+#bola_Moldura{
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%); /* centraliza no eixo X */
+    display: flex;
+    gap: 15px; /* espaço entre eles */
+    z-index: 2;
+}
+
+.bola_Moldura{
+    width: 20px;
+    height: 20px;
+}

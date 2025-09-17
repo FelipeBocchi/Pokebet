@@ -1,0 +1,79 @@
+*{
+    text-decoration: none;
+    margin: 0; 
+    padding: 0;
+}
+
+#section_Pesquisar{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    gap: 800px;
+}
+
+.input_Pesquisa{
+    width: 366px;
+    height: 52px;
+    border-radius: 4px;
+    text-align: center;
+    color:black;
+    background-color: #A0C8F0;
+    
+}
+
+
+#section_Numeros_Pokemons{
+    /* tirei o absolute pra não colar no topo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#div_Numeros_Pokemons{
+    background-color: #F8F8F8;  
+    width: 466px;
+    height: 58px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#p_numeros_Pokemons{
+    font-size: 20px;
+
+}
+
+.btn_Numeros{
+    border: none;
+    background-color: #F4DFC1;
+    font-size: 58px;
+}
+
+
+#div_Pokemons{
+    width: 1285px;
+    height: 600px;
+    background-color: #98C860;
+    
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; /* garante centralização vertical também */
+}
+
+.div_Do_Pokemon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 148px;
+
+}
+
+#btn_Seta_Esquerda{
+    transform: rotate(180deg);
+}
