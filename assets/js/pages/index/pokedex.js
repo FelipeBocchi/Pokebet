@@ -1,4 +1,4 @@
-import { getPokemon } from "./../../global/api.js";
+import { getPokemon } from "../../global/api.js";
 
 const input_Geracoes = document.querySelector("#input_Geracoes")
 const input_Pesquisar = document.querySelector("#input_Pesquisar")
@@ -57,9 +57,9 @@ const preencre_Tela_Pokemons = async () => {
 };
 
 // - Chama a função pela primeira vez para preencher a página
-document.addEventListener("DOMContentLoaded", ()=>{
+//document.addEventListener("DOMContentLoaded", ()=>{
   preencre_Tela_Pokemons();
-})
+//})
 
 
 
