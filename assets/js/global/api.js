@@ -11,15 +11,29 @@ async function fetchData(endpoint) {
   }
 }
 
+// Função genérica para buscar a descrição 
+export async function getPokemonDescription(nameOrId, lang = "pt-BR") {
+  const data = await fetchData(`pokemon-species/${nameOrId}`);
+  if (!data) return "Descrição não disponível";
+
+  // procura a descrição na língua escolhida
+  let entry = data.flavor_text_entries.find(
+    (item) => item.language.name === lang
+  );
+
+
+  // se não achar em PT-BR, cai pro inglês
+  if (!entry) {
+    entry = data.flavor_text_entries.find(
+      (item) => item.language.name === "en"
+    );
+  }
+
+  return entry ? entry.flavor_text : "Descrição não encontrada";
+}
+
+
 // Funções específicas
 export async function getPokemon(nameOrId) {
   return await fetchData(`pokemon/${nameOrId}`);
-}
-
-export async function getAbility(id) {
-  return await fetchData(`ability/${id}`);
-}
-
-export async function getType(id) {
-  return await fetchData(`type/${id}`);
 }

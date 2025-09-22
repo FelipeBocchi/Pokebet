@@ -2,7 +2,7 @@ export async function navigate(page) {
   const routes = {
     home:     { html: "pages/home.html", js: "scripts/home.js" },
     pokedex:  { html: "pokedex.html", js: "assets/js/pages/index/pokedex.js" },
-    batalha:  { html: "pages/batalha.html", js: "scripts/batalha.js" },
+    pokemon:  { html: "pokemon.html", js: "assets/js/pages/pt_Pokemon/pokemon.js" },
     perfil:   { html: "pages/perfil.html", js: "scripts/perfil.js" },
     info:     { html: "pages/info.html", js: "scripts/info.js" }
   };
