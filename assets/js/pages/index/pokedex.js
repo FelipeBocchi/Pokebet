@@ -1,4 +1,5 @@
 import { getPokemon } from "../../global/api.js";
+import { valida } from "./moldura.js";
 
 const input_Geracoes = document.querySelector("#input_Geracoes")
 const input_Pesquisar = document.querySelector("#input_Pesquisar")
@@ -49,7 +50,14 @@ const preencre_Tela_Pokemons = async () => {
     article.innerHTML = `
       <img src="${imgSrc}" alt="${p.name}">
       
-    `; //<p>${p.name}</p>
+    `;
+
+    //evento de clicar
+    article.addEventListener("click", ()=>{
+        sessionStorage.setItem("click", 1)
+        sessionStorage.setItem("pokemon", p.id)
+        valida();
+    })
 
     div_Do_Pokemon.appendChild(article);
     div_Pokemons.appendChild(div_Do_Pokemon);
@@ -60,7 +68,6 @@ const preencre_Tela_Pokemons = async () => {
 //document.addEventListener("DOMContentLoaded", ()=>{
   preencre_Tela_Pokemons();
 //})
-
 
 
 // - Botão para passar os Pokemons aumentando o indice
@@ -134,3 +141,17 @@ input_Geracoes.addEventListener("change", ()=>{
   })
 
 
+  input_Pesquisar.addEventListener("change", ()=>{
+    let pokemon_Pesquisado = input_Pesquisar.value;
+
+    if(pokemon_Pesquisado <= 1025 || typeof pokemon_Pesquisado === "string")
+    {
+      sessionStorage.setItem("click", 1);
+      sessionStorage.setItem("pokemon", pokemon_Pesquisado);
+      valida();
+    }else
+    {
+      alert("Número de Pokémon pesquisado não existe");
+    }
+
+  })

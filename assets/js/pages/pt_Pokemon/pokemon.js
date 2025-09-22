@@ -10,10 +10,11 @@ const p_Type_Pokemon = document.querySelector("#p_Type_Pokemon");
 const p_Ot_Pokemon = document.querySelector("#p_Ot_Pokemon");
 const p_Idno_Pokemon = document.querySelector("#p_Idno_Pokemon");
 const p_Item_Pokemon = document.querySelector("#p_Item_Pokemon");
+const btn_voltar_Pokedex = document.querySelector("#btn_voltar_Pokedex");
 
 const puxa_Info_Api = async ()=>{
     // - Pokémon selecionado
-    const poke = "25"
+    const poke = sessionStorage.getItem("pokemon");
 
     // - Pega dados do pokémon
     const pokemon = await getPokemon(poke);
@@ -54,5 +55,9 @@ const puxa_Info_Api = async ()=>{
         p_Descricao_Pokedex.innerHTML = descricao;
     }
 }
+
+btn_voltar_Pokedex.addEventListener("click", ()=>{
+    window.location.reload(true);
+})
 
 puxa_Info_Api();

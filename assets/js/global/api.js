@@ -18,16 +18,17 @@ export async function getPokemonDescription(nameOrId, lang = "pt-BR") {
 
   // procura a descrição na língua escolhida
   let entry = data.flavor_text_entries.find(
-    (item) => item.language.name === lang
+    (item) => item.language.name === lang && item.version.name === "firered"
   );
-
 
   // se não achar em PT-BR, cai pro inglês
   if (!entry) {
     entry = data.flavor_text_entries.find(
-      (item) => item.language.name === "en"
+      (item) => item.language.name === "en" && item.version.name === "firered"
     );
   }
+
+  if (!entry) return { description: "Descrição não encontrada", version: null };
 
   return entry ? entry.flavor_text : "Descrição não encontrada";
 }
