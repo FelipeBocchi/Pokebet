@@ -1,5 +1,5 @@
 import { navigate } from "./../../global/app.js";
-
+/*
 // - Inicializa a chave como 0
 sessionStorage.setItem("click", 0)
 
@@ -15,7 +15,7 @@ if(sessionStorage.getItem("click") !=0)
 
 // - chama quando o site é carregado pela primeira vez
 valida()
+*/
 
 
-
-
+navigate("team");

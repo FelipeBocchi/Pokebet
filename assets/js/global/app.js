@@ -3,7 +3,7 @@ export async function navigate(page) {
     home:     { html: "pages/home.html", js: "scripts/home.js" },
     pokedex:  { html: "pokedex.html", js: "assets/js/pages/index/pokedex.js" },
     pokemon:  { html: "pokemon.html", js: "assets/js/pages/pt_Pokemon/pokemon.js" },
-    perfil:   { html: "pages/perfil.html", js: "scripts/perfil.js" },
+    team:   { html: "team_Pokemon.html", js: "assets/js/pages/pt_Team/team_Pokemon.js" },
     info:     { html: "pages/info.html", js: "scripts/info.js" }
   };
 
