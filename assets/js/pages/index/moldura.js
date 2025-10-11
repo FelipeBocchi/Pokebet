@@ -18,4 +18,6 @@ valida()
 */
 
 
-navigate("team");
+//navigate("team");
+
+navigate("info");

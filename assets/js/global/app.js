@@ -4,7 +4,7 @@ export async function navigate(page) {
     pokedex:  { html: "pokedex.html", js: "assets/js/pages/index/pokedex.js" },
     pokemon:  { html: "pokemon.html", js: "assets/js/pages/pt_Pokemon/pokemon.js" },
     team:   { html: "team_Pokemon.html", js: "assets/js/pages/pt_Team/team_Pokemon.js" },
-    info:     { html: "pages/info.html", js: "scripts/info.js" }
+    info:     { html: "info_City.html", js: "assets/js/pages/pt_Info_City/info_City.js" }
   };
 
   const route = routes[page];
