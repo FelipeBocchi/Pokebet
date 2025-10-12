@@ -1,10 +1,10 @@
 export async function navigate(page) {
   const routes = {
-    home:     { html: "pages/home.html", js: "scripts/home.js" },
     pokedex:  { html: "pokedex.html", js: "assets/js/pages/index/pokedex.js" },
     pokemon:  { html: "pokemon.html", js: "assets/js/pages/pt_Pokemon/pokemon.js" },
     team:   { html: "team_Pokemon.html", js: "assets/js/pages/pt_Team/team_Pokemon.js" },
-    info:     { html: "info_City.html", js: "assets/js/pages/pt_Info_City/info_City.js" }
+    info:     { html: "info_City.html", js: "assets/js/pages/pt_Info_City/info_City.js" },
+    battle:     { html: "battle.html", js: "assets/js/pages/pt_Battle/battle.js" }
   };
 
   const route = routes[page];

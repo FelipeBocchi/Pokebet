@@ -1,0 +1,208 @@
+/*  - blocos dos pokemons*/
+.status_atack_Pokemon_Battle{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    place-items: center;
+
+    width: 300px;
+    height: 100px;
+
+    box-shadow: 4px 2px 0px 0px rgba(191,191,191,1);
+
+    background-color: #E5E5E5;
+}
+
+.attacks_Pokemon_Battle{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    place-items: center;
+
+    width: 500px;
+    height: 100px;
+
+    box-shadow: 4px 2px 0px 0px rgba(191,191,191,1);
+
+    background-color: #E5E5E5;
+}
+
+
+.status_Pokemon_Battle{
+    display: flex;
+
+    width: 400px;
+    height: 100px;
+
+    box-shadow: 4px 2px 0px 0px rgba(191,191,191,1);
+
+    background-color:#E5E5E5;
+}
+
+/*==========================================*/
+/*  - blocos superiores - */
+#status_atack_Pokemon_Battle_1{
+    position: absolute;
+    top: 2%;
+    left: 5%;
+}
+
+#attacks_Pokemon_Battle_1{
+    position: absolute;
+    top: 2%;
+    left: 23%;
+}
+
+#status_Pokemon_Battle_1{
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}
+
+/*============================================*/
+/*  - blocos inferiores -*/
+#status_atack_Pokemon_Battle_2{
+    position: absolute;
+    bottom: 2%;
+    right: 5%;
+}
+
+#attacks_Pokemon_Battle_2{
+    position: absolute;
+    bottom: 2%;
+    right: 23%;
+}
+
+#status_Pokemon_Battle_2{
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+}
+
+/*===============================================*/
+/*  - campo de grama dos pokémons - */
+.campo_Pokemon_Battle{
+    width: 250px;
+    height: 100px;
+
+    border-radius: 100%;
+
+    background-color: #9DD061;
+}
+
+#campo_Pokemon_Battle_1{
+    position: absolute;
+    bottom: 15%;
+    left: 5%;
+}
+
+#campo_Pokemon_Battle_2{
+    position: absolute;
+    top: 15%;
+    right: 5%;
+}
+
+/*================================================*/
+/*  - barra de hp - */
+.hp-bar {
+  position: absolute;
+  top: 40%;
+  right: 10%;
+
+  width: 200px;
+  height: 20px;
+  background-color: #333;
+  border: 2px solid #000;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+}
+
+.hp-inner {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #00ff00, #55ff00);
+  border-radius: 8px;
+  transition: width 0.5s ease-in-out; /* anima a redução */
+}
+
+/*  - nome pokemon - */
+#nome_Pokemon_Bettle_1{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+#nome_Pokemon_Bettle_2{
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+#hp_text_1{
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+#hp_text_2{
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+}
+
+/*======================================*/
+/*  - pokemon 1 - */
+#pokemon_Battle_1{
+    position: absolute;
+    bottom: 18%;
+    left: 6%;
+
+    width: 200px;
+    height: 200px;
+}
+
+/*  - pokemon 2 - */
+#pokemon_Battle_2{
+    position: absolute;
+    top: 5%;
+    right: 6%;
+
+    width: 200px;
+    height: 200px;
+
+    z-index: 2;
+}
+
+/*==================================*/
+/*  - botões de ataque*/
+/* estilo dos botões */
+.btn_Attack_Battle {
+    font-family: 'Press Start 2P', monospace; /* estilo retrô */
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn_Attack_Battle::before{
+    content: "";
+    position: absolute;
+    left: -14px; /* desloca a seta à esquerda */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 8px solid #333; /* cor da seta */
+    opacity: 0;
+    transition: opacity 0.15s, transform 0.1s;
+
+    font-family: 'Press Start 2P', monospace; /* estilo retrô */
+}
+
+.btn_Attack_Battle:hover::before{
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+}
+
+
+
