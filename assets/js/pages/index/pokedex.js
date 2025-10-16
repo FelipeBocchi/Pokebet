@@ -64,10 +64,11 @@ const preencre_Tela_Pokemons = async () => {
   });
 };
 
-// - Chama a função pela primeira vez para preencher a página
-//document.addEventListener("DOMContentLoaded", ()=>{
-  preencre_Tela_Pokemons();
-//})
+
+
+   preencre_Tela_Pokemons();
+
+
 
 
 // - Botão para passar os Pokemons aumentando o indice
@@ -75,8 +76,9 @@ btn_Seta_Direita.addEventListener("click", ()=>{
   // prepara para próxima "página"
   start = max_Pokemon + 1;
   max_Pokemon+=MAX;
-
+  
   preencre_Tela_Pokemons();
+ 
 })
 
 // - Botão para passar os Pokemons diminuindo o indice

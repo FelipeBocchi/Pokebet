@@ -35,6 +35,8 @@ const audio_Battle = new Audio("./assets/audio/Battle.mp3");
 audio_Battle.currentTime = 0;
 audio_Battle.volume = 0.3;
 audio_Battle.play().catch(err => console.log("Erro ao tocar som:", err));
+// - registra esse áudio globalmente
+window.audiosAtivos.push(audio_Battle);
 
 // === TABELA DE FRAQUEZAS SIMPLIFICADA ===
 const typeEffectiveness = {
@@ -48,6 +50,8 @@ const typeEffectiveness = {
   fighting: { rock: 2, flying: 0.5 },
 };
 
+// === localStorage para saber quando saí da aba ===
+    localStorage.setItem("aba", "5");
 
 const pokemon_Battle_1 = async ()=>{
     const nome_Pokemon = localStorage.getItem("Pokemon_6"); 
@@ -224,6 +228,7 @@ function applyDamage(defender, hpObj, move, imgId, hpText) {
     setTimeout(() => {
       alert(`${defender.name} foi derrotado! 🏆`);
       location.reload();
+      audio_Battle.pause();
     }, 500);
   }
 }

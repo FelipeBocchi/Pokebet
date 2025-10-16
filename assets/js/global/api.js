@@ -33,7 +33,7 @@ export async function getPokemonDescription(nameOrId, lang = "pt-BR") {
   return entry ? entry.flavor_text : "Descrição não encontrada";
 }
 
-
+//nameOrId
 // Funções específicas
 export async function getPokemon(nameOrId) {
   return await fetchData(`pokemon/${nameOrId}`);

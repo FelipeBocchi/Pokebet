@@ -23,6 +23,13 @@ if (!localStorage.getItem("Pokemon_4")) localStorage.setItem("Pokemon_4", "4");
 if (!localStorage.getItem("Pokemon_5")) localStorage.setItem("Pokemon_5", "5");
 if (!localStorage.getItem("Pokemon_6")) localStorage.setItem("Pokemon_6", "6");
 
+// === audio ===
+const audio = new Audio("./assets/audio/Welcome.mp3");
+audio.volume = 0.3;
+audio.loop = true;
+audio.play().catch(err => console.log("Erro ao tocar som:", err));
+// - registra esse áudio globalmente
+window.audiosAtivos.push(audio);
 
 let click = localStorage.getItem("Pokemon_1");
 let poke_LocalStorage;
