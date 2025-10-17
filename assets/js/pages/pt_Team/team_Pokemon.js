@@ -1,258 +1,150 @@
 import { getPokemon } from "./../../global/api.js";
+import { navigate } from "./../../global/app.js"; // usa para chavar a aba do info
 
-const p_Pokemon_Team_1 = document.querySelector("#p_Pokemon_Team_1");
-const p_Pokemon_Team_2 = document.querySelector("#p_Pokemon_Team_2");
-const p_Pokemon_Team_3 = document.querySelector("#p_Pokemon_Team_3");
-const p_Pokemon_Team_4 = document.querySelector("#p_Pokemon_Team_4");
-const p_Pokemon_Team_5 = document.querySelector("#p_Pokemon_Team_5");
-const p_Pokemon_Team_6 = document.querySelector("#p_Pokemon_Team_6");
-const div_Conteiner_Pokemon_1 = document.querySelector("#div_Conteiner_Pokemon_1");
-const div_Conteiner_Pokemon_2 = document.querySelector("#div_Conteiner_Pokemon_2");
-const div_Conteiner_Pokemon_3 = document.querySelector("#div_Conteiner_Pokemon_3");
-const div_Conteiner_Pokemon_4 = document.querySelector("#div_Conteiner_Pokemon_4");
-const div_Conteiner_Pokemon_5 = document.querySelector("#div_Conteiner_Pokemon_5");
-const div_Conteiner_Pokemon_6 = document.querySelector("#div_Conteiner_Pokemon_6");
-const div_Conteiner_Pokemon_Team =document.querySelector("#div_Conteiner_Pokemon_Team");
+// ======== Configurações iniciais ========
+const div_Conteiner_Pokemon_Team = document.querySelector("#div_Conteiner_Pokemon_Team");
 const btn_Delete_Pokemon_Team = document.querySelector("#btn_Delete_Pokemon_Team");
+const btnTrocar = document.querySelector("#btn_Trocar_Pokemon");
+const btn_Info_Pokemon_Team = document.querySelector("#btn_Info_Pokemon_Team");
 
+// Inicializa slots no localStorage se não existir
+for (let i = 1; i <= 6; i++) {
+    if (!localStorage.getItem(`Pokemon_${i}`)) localStorage.setItem(`Pokemon_${i}`, i.toString());
+}
 
-if (!localStorage.getItem("Pokemon_1")) localStorage.setItem("Pokemon_1", "1");
-if (!localStorage.getItem("Pokemon_2")) localStorage.setItem("Pokemon_2", "2");
-if (!localStorage.getItem("Pokemon_3")) localStorage.setItem("Pokemon_3", "3");
-if (!localStorage.getItem("Pokemon_4")) localStorage.setItem("Pokemon_4", "4");
-if (!localStorage.getItem("Pokemon_5")) localStorage.setItem("Pokemon_5", "5");
-if (!localStorage.getItem("Pokemon_6")) localStorage.setItem("Pokemon_6", "6");
-
-// === audio ===
+// Audio
 const audio = new Audio("./assets/audio/Welcome.mp3");
 audio.volume = 0.3;
 audio.loop = true;
 audio.play().catch(err => console.log("Erro ao tocar som:", err));
-// - registra esse áudio globalmente
 window.audiosAtivos.push(audio);
 
-let click = localStorage.getItem("Pokemon_1");
-let poke_LocalStorage;
-let posicao = 0;
+// ======== Variáveis de controle ========
+let posicao = 0;              // slot selecionado (1 a 6)
+let poke_LocalStorage = null; // chave localStorage do slot selecionado
+let teamDivs = document.querySelectorAll(".divs_Pokemons_Team");
 
-const team_Pokemon = async (i)=>{
+// ======== Função para renderizar Pokémon de cada slot ========
+const team_Pokemon = async (i) => {
+    const slotKey = `Pokemon_${i}`;
+    const container = document.querySelector(`#div_Conteiner_Pokemon_${i}`);
+    const pPokemon = document.querySelector(`#p_Pokemon_Team_${i}`);
+    const slotValue = localStorage.getItem(slotKey);
 
-    const setpokemon = localStorage.getItem(`Pokemon_${i}`);      //  - pega o id salvo no localstorage
-    if (setpokemon === "0") return; // posição vazia
+    container.innerHTML = ""; // limpa antes de renderizar
 
-    const pokemon = await getPokemon(setpokemon);               //  - puxa o pokemon na api
+    // Sempre adiciona pokebola de fundo
+    const pokebolaBg = document.createElement("img");
+    pokebolaBg.src = "./assets/img/pokebola.png";
+    pokebolaBg.alt = "Pokebola de fundo";
+    pokebolaBg.classList.add("pokebola_fundo"); 
+    container.appendChild(pokebolaBg);
 
-    if(pokemon)
-    {
-        let article;
-        let imgSrc;
-        switch(i) 
-        {
-            case 1:
-                p_Pokemon_Team_1.innerHTML  = `${pokemon.name}`;
+    // Clique no container seleciona o slot
+    container.parentElement.addEventListener("click", () => {
+        posicao = i;
+        poke_LocalStorage = slotKey;
+        console.log(`Slot ${i} selecionado`);
+    });
 
-                article = document.createElement("article");
-                imgSrc = pokemon.sprites?.front_default || "placeholder.png";
-
-                article.innerHTML = `
-                <img src="${imgSrc}" id="id_Pokemon_Team_1" alt="${pokemon.name}">`;
-
-                article.setAttribute("class", "img_Pokemons_Team");
-                //article.setAttribute("id", "id_Pokemon_Team_1");
-
-                article.addEventListener("click", ()=>{
-                    click = `${pokemon.id}`;
-                    poke_LocalStorage = "Pokemon_1";
-                    posicao = 1;
-                    poke_Click(click);
-                })
-
-                div_Conteiner_Pokemon_1.appendChild(article);
-                break;
-        
-            case 2:
-                p_Pokemon_Team_2.innerHTML  = `${pokemon.name}`;
-
-                article = document.createElement("article");
-                imgSrc = pokemon.sprites?.front_default || "placeholder.png";
-
-                article.innerHTML = `
-                <img src="${imgSrc}" id="id_Pokemon_Team_2" alt="${pokemon.name}">`;
-
-                article.setAttribute("class", "img_Pokemons_Team");
-                //article.setAttribute("id", "id_Pokemon_Team_2");
-
-                article.addEventListener("click", ()=>{
-                    click = `${pokemon.id}`;
-                    poke_LocalStorage = "Pokemon_2";
-                    
-                    poke_Click(click);
-                })
-
-                div_Conteiner_Pokemon_2.appendChild(article);
-                break;
-        
-            case 3:
-                p_Pokemon_Team_3.innerHTML  = `${pokemon.name}`;
-
-                article = document.createElement("article");
-                imgSrc = pokemon.sprites?.front_default || "placeholder.png";
-
-                article.innerHTML = `
-                <img src="${imgSrc}" id="id_Pokemon_Team_3" alt="${pokemon.name}">`;
-
-                article.setAttribute("class", "img_Pokemons_Team");
-                //article.setAttribute("id", "id_Pokemon_Team_3");
-
-                article.addEventListener("click", ()=>{
-                    click = `${pokemon.id}`;
-                    poke_LocalStorage = "Pokemon_3";
-                    posicao = 3;
-                    poke_Click(click);
-                })
-
-                div_Conteiner_Pokemon_3.appendChild(article);
-                break;
-        
-            case 4:
-                p_Pokemon_Team_4.innerHTML  = `${pokemon.name}`;
-
-                article = document.createElement("article");
-                imgSrc = pokemon.sprites?.front_default || "placeholder.png";
-
-                article.innerHTML = `
-                <img src="${imgSrc}" id="id_Pokemon_Team_4" alt="${pokemon.name}">`;
-
-                article.setAttribute("class", "img_Pokemons_Team");
-                //article.setAttribute("id", "id_Pokemon_Team_4");
-
-                article.addEventListener("click", ()=>{
-                    click = `${pokemon.id}`;
-                    poke_LocalStorage = "Pokemon_4";
-                    posicao = 4;
-                    poke_Click(click);
-                })
-
-                div_Conteiner_Pokemon_4.appendChild(article);
-                break;
-        
-            case 5:
-                p_Pokemon_Team_5.innerHTML  = `${pokemon.name}`;
-
-                article = document.createElement("article");
-                imgSrc = pokemon.sprites?.front_default || "placeholder.png";
-
-                article.innerHTML = `
-                <img src="${imgSrc}" id="id_Pokemon_Team_5" alt="${pokemon.name}">`;
-
-                article.setAttribute("class", "img_Pokemons_Team");
-                //article.setAttribute("id", "id_Pokemon_Team_5");
-
-                article.addEventListener("click", ()=>{
-                    click = `${pokemon.id}`;
-                    poke_LocalStorage = "Pokemon_5";
-                    posicao = 5;
-                    poke_Click(click);
-                })
-
-                div_Conteiner_Pokemon_5.appendChild(article);
-                break;
-        
-            case 6:
-                p_Pokemon_Team_6.innerHTML  = `${pokemon.name}`;
-
-                article = document.createElement("article");
-                imgSrc = pokemon.sprites?.front_default || "placeholder.png";
-
-                article.innerHTML = `
-                <img src="${imgSrc}" id="id_Pokemon_Team_6" alt="${pokemon.name}">`;
-
-                article.setAttribute("class", "img_Pokemons_Team");
-                //article.setAttribute("id", "id_Pokemon_Team_6");
-
-                article.addEventListener("click", ()=>{
-                    click = `${pokemon.id}`;
-                    poke_LocalStorage = "Pokemon_6";
-                    posicao = 6;
-                    poke_Click(click);
-                })
-
-                div_Conteiner_Pokemon_6.appendChild(article);
-                break;
-        
-            default:
-                break;
-        }
-    }else
-    {
-        console.log("pokemon não encontrado!!!");
+    if (slotValue === "0") {
+        // Slot vazio → pokebola
+        pPokemon.textContent = "";
+        container.innerHTML = `<img src="./assets/img/pokebola.png" alt="pokemon dentro da pokebola">`;
+        return;
     }
-}
 
-for(let i = 1; i <= 6; i++)
-{
+    // Slot com Pokémon
+    const pokemon = await getPokemon(slotValue);
+    if (!pokemon) return console.log("Pokémon não encontrado");
+
+    pPokemon.textContent = pokemon.name;
+
+    const article = document.createElement("article");
+    const imgSrc = pokemon.sprites?.front_default || "placeholder.png";
+    article.innerHTML = `<img src="${imgSrc}" alt="${pokemon.name}">`;
+    article.classList.add("img_Pokemons_Team");
+
+    // Clique na imagem mostra info
+    article.addEventListener("click", (e) => {
+        e.stopPropagation();
+        poke_Click(pokemon.id);
+    });
+
+    container.appendChild(article);
+};
+
+// ======== Renderiza todos os slots ========
+for (let i = 1; i <= 6; i++) {
     team_Pokemon(i);
 }
 
-const poke_Click = async(c)=>{
-    const poke = await getPokemon(c);
+// ======== Função para mostrar info do Pokémon no painel ========
+const poke_Click = async (id) => {
+    const poke = await getPokemon(id);
+    if (!poke) return;
 
-    div_Conteiner_Pokemon_Team.innerHTML = "";      //  - Limpa o conteúdo para criar o novo elemento
+    div_Conteiner_Pokemon_Team.innerHTML = "";
 
-    let p_Pokemon = document.createElement("p");
-    p_Pokemon.innerHTML = `${poke.name}`
+    const p_Pokemon = document.createElement("p");
+    p_Pokemon.textContent = poke.name;
 
-    let article = document.createElement("article");
-    let imgSrc = poke.sprites?.front_default || "placeholder.png";
-
-    article.innerHTML = `
-    <img src="${imgSrc}" id="article_Pokemon_Click_Team" alt="${poke.name}">`;
-
-    //article.setAttribute("id", "article_Pokemon_Click_Team");
+    const article = document.createElement("article");
+    const imgSrc = poke.sprites?.front_default || "placeholder.png";
+    article.innerHTML = `<img src="${imgSrc}" alt="${poke.name}" id="article_Pokemon_Click_Team">`;
 
     div_Conteiner_Pokemon_Team.appendChild(article);
     div_Conteiner_Pokemon_Team.appendChild(p_Pokemon);
-}
 
-poke_Click(click);
+    //  === coloca o id do pokemon para o info
+    sessionStorage.setItem("pokemon", id);
+};
 
+// Inicializa painel com o primeiro Pokémon
+poke_Click(localStorage.getItem("Pokemon_1"));
 
+// ======== Botão DELETE ========
 btn_Delete_Pokemon_Team.addEventListener("click", () => {
-    if (!poke_LocalStorage) return; // se nenhum pokemon estiver selecionado
+    if (!poke_LocalStorage) return alert("Selecione um Pokémon!");
 
-    // zera o valor no localStorage
-    localStorage.setItem(poke_LocalStorage, "0");
-
-    // limpa o nome e imagem da posição correspondente
-    switch(poke_LocalStorage) {
-        case "Pokemon_1":
-            div_Conteiner_Pokemon_1.innerHTML = "";
-            p_Pokemon_Team_1.textContent = "";
-            break;
-        case "Pokemon_2":
-            div_Conteiner_Pokemon_2.innerHTML = "";
-            p_Pokemon_Team_2.textContent = "";
-            break;
-        case "Pokemon_3":
-            div_Conteiner_Pokemon_3.innerHTML = "";
-            p_Pokemon_Team_3.textContent = "";
-            break;
-        case "Pokemon_4":
-            div_Conteiner_Pokemon_4.innerHTML = "";
-            p_Pokemon_Team_4.textContent = "";
-            break;
-        case "Pokemon_5":
-            div_Conteiner_Pokemon_5.innerHTML = "";
-            p_Pokemon_Team_5.textContent = "";
-            break;
-        case "Pokemon_6":
-            div_Conteiner_Pokemon_6.innerHTML = "";
-            p_Pokemon_Team_6.textContent = "";
-            break;
-    }
-
-    // limpa o painel do time principal
-    div_Conteiner_Pokemon_Team.innerHTML = "";
-
-    console.log(`Pokémon removido da posição ${poke_LocalStorage}`);
+    localStorage.setItem(poke_LocalStorage, "0"); // zera slot
+    const i = parseInt(poke_LocalStorage.split("_")[1]);
+    team_Pokemon(i); // atualiza slot
+    div_Conteiner_Pokemon_Team.innerHTML = ""; // limpa painel
+    poke_LocalStorage = null;
+    posicao = 0;
 });
+
+// ======== Botão TROCAR ========
+btnTrocar.addEventListener("click", () => {
+    if (!posicao) return alert("Selecione um Pokémon ou posição vazia!");
+    if (document.querySelector("#input_Troca_Pokemon")) return;
+
+    const input = document.createElement("input");
+    input.id = "input_Troca_Pokemon";
+    input.type = "number";
+    input.placeholder = "Digite o ID do Pokémon";
+    input.style.marginBottom = "10px";
+    input.style.width = "150px";
+
+    btnTrocar.parentNode.insertBefore(input, btnTrocar);
+    input.focus();
+
+    input.addEventListener("keydown", async (e) => {
+        if (e.key === "Enter") {
+            const valor = input.value.trim();
+            if (!valor) return alert("Digite um ID válido!");
+
+            localStorage.setItem(`Pokemon_${posicao}`, valor); // atualiza slot
+            team_Pokemon(posicao); // renderiza slot
+            div_Conteiner_Pokemon_Team.innerHTML = ""; // limpa painel
+            input.remove();
+        }
+    });
+});
+
+
+//  === Opção info do Team ===
+btn_Info_Pokemon_Team.addEventListener("click", ()=>{
+  navigate("pokemon");
+}) 

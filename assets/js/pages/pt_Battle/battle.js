@@ -50,8 +50,6 @@ const typeEffectiveness = {
   fighting: { rock: 2, flying: 0.5 },
 };
 
-// === localStorage para saber quando saí da aba ===
-    localStorage.setItem("aba", "5");
 
 const pokemon_Battle_1 = async ()=>{
     const nome_Pokemon = localStorage.getItem("Pokemon_6"); 

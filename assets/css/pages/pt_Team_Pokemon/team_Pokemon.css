@@ -179,27 +179,45 @@
 }
 
 
-#div_Btn_Pokemom_Team{
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+/* 🔹 Corrige container dos botões */
+#div_Btn_Pokemom_Team {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-top: 20px;
 
-    margin-top: 20px;
-img_Pokemons_Team
-    height: 120px;
+  /* Mantém o estilo */
+  border-radius: 16px;
+  border: 2px solid black;
+  background-color: white;
 
-    border-radius: 16px;
-    border: 2px solid black;
-
-    background-color: white;
+  /* 🔥 ESSENCIAIS pra seta funcionar */
+  position: relative;
+  overflow: visible;
 }
 
+/* === BOTÕES RETRÔ COM SETA AO PASSAR O MOUSE === */
 .btn_Pokemon_Team{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    margin: 4px 0px;
+  margin: 5px 0px;
+  transition: background 0.2s;
 
-    border-radius: 16px;
+  font-family: 'Press Start 2P', monospace; /* estilo retrô */
+}
+
+.btn_Pokemon_Team:hover{
+  background-color: rgb(180, 180, 180);
+  border-radius: 16px;
+
+  margin: 7px 0px;
+}
+
+/*======================================*/
+/*  === Input para trocar Pokémos === */
+#input_Troca_Pokemon{
+  margin-top: 4px;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
 }
