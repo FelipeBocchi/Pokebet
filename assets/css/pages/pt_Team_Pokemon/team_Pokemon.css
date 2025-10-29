@@ -1,0 +1,223 @@
+#div_Conteudo_Team_Pokemon{
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+
+    
+}
+
+/*  - parte dos pokemons do time */
+/* 🔹 Container principal */
+#section_Conteiner_Team_Pokemons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 35px; /* espaço entre os pokémons */
+  padding: 20px 0;
+  width: 40%;
+  height: 90%;
+
+  position: absolute;
+  left: 5%;
+}
+
+/* 🔹 Cada Pokémon individual */
+.divs_Pokemons_Team {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #03b4c8;
+  width: 90%;
+  padding: 10px 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+/* efeito hover */
+.divs_Pokemons_Team:hover {
+  transform: scale(1.02);
+}
+
+/* ======================== */
+/* 🎯 BARRA DE HP estilo Pokémon */
+.div_HP_Container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hp_bar_outer {
+  display: flex;
+  align-items: center;
+  background-color: #1a6b82;
+  border-radius: 10px;
+  padding: 2px 5px;
+  width: 350px;
+  height: 20px;
+}
+
+.hp_label {
+  background-color: #d5853b;
+  color: #fff;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 12px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.hp_bar_inner {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  background-color: #185d64;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.hp_fill {
+  height: 100%;
+  background-color: #6ce36c;
+  transition: width 0.4s ease;
+}
+
+.hp_text {
+  color: white;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 8px;
+  margin-top: 3px;
+}
+
+/* ======================== */
+
+/* 🔹 Texto de HP (50/50) e Nome */
+.divs_Pokemons_Team p {
+  color: white;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 16px;
+  margin: 5px 10px 0px 10px;
+}
+
+/* nome do Pokémon */
+.divs_Pokemons_Team p:nth-of-type(2) {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 🔹 Pokébola */
+.img_Pokebola_Team {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+
+
+}
+
+/* 🔹 Ajusta o conteúdo interno do primeiro bloco (vida + HP) */
+.divs_Pokemons_Team > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* 🔹 Garante que o último bloco (pokébola) fique bem alinhado */
+.divs_Pokemons_Team > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*==========================*/
+/*  - Imagem do pokemons do team */
+.img_Pokemons_Team{
+  position: absolute;
+
+  width: auto;
+  height: auto;
+}
+/*==========================*/
+
+
+/*  - parte das informações do pokemon do time*/
+#section_Conteiner_Info_Pokemon_Team{
+    width: 30%;
+    height: auto;
+
+
+    position: absolute;
+    top: 17%;
+    right: 5%;
+}
+
+#div_Conteiner_Pokemon_Team{
+    width: 100%;
+    height: 250px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    border-radius: 8px  ;
+
+    background-color: #03b4c8;
+}
+
+/*  - Imagem do Pokémon Click*/
+#article_Pokemon_Click_Team{
+  width: auto;
+  height: 200px;
+}
+
+
+/* 🔹 Corrige container dos botões */
+#div_Btn_Pokemom_Team {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-top: 20px;
+
+  /* Mantém o estilo */
+  border-radius: 16px;
+  border: 2px solid black;
+  background-color: white;
+
+  /* 🔥 ESSENCIAIS pra seta funcionar */
+  position: relative;
+  overflow: visible;
+}
+
+/* === BOTÕES RETRÔ COM SETA AO PASSAR O MOUSE === */
+.btn_Pokemon_Team{
+  display: flex;
+  justify-content: center;
+
+  margin: 5px 0px;
+  transition: background 0.2s;
+
+  font-family: 'Press Start 2P', monospace; /* estilo retrô */
+}
+
+.btn_Pokemon_Team:hover{
+  background-color: rgb(180, 180, 180);
+  border-radius: 16px;
+
+  margin: 7px 0px;
+}
+
+/*======================================*/
+/*  === Input para trocar Pokémos === */
+#input_Troca_Pokemon{
+  margin-top: 4px;
+  margin-left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,10 +1,10 @@
 export async function navigate(page) {
   const routes = {
-    home:     { html: "pages/home.html", js: "scripts/home.js" },
     pokedex:  { html: "pokedex.html", js: "assets/js/pages/index/pokedex.js" },
-    batalha:  { html: "pages/batalha.html", js: "scripts/batalha.js" },
-    perfil:   { html: "pages/perfil.html", js: "scripts/perfil.js" },
-    info:     { html: "pages/info.html", js: "scripts/info.js" }
+    pokemon:  { html: "pokemon.html", js: "assets/js/pages/pt_Pokemon/pokemon.js" },
+    team:   { html: "team_Pokemon.html", js: "assets/js/pages/pt_Team/team_Pokemon.js" },
+    info:     { html: "info_City.html", js: "assets/js/pages/pt_Info_City/info_City.js" },
+    battle:     { html: "battle.html", js: "assets/js/pages/pt_Battle/battle.js" }
   };
 
   const route = routes[page];
@@ -24,7 +24,12 @@ export async function navigate(page) {
 
   const script = document.createElement("script");
   script.type = "module";
-  script.src = route.js;
+  script.src = `${route.js}?v=${Date.now()}`; // força reload
   script.id = "page-script"; // id pra controlar script carregado
+
+    // Espera o HTML estar montado antes de executar o script
+  script.onload = () => console.log(`${route.js} carregado com sucesso!`);
+  script.onerror = (e) => console.error(`Erro ao carregar ${route.js}`, e);
+
   document.body.appendChild(script);
 }

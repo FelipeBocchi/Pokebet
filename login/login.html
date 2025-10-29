@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login CMD Pixelado</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px; 
+      padding: 20px;
+      line-height: 1.6;
+    }
+
+    .linha {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .prompt {
+      margin-right: 10px;
+      white-space: nowrap;
+    }
+
+    input {
+      background: black;
+      border: none;
+      border-bottom: 1px solid white;
+      color: white;
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+      width: 200px;
+      padding: 4px 2px;
+    }
+
+    #mensagem {
+      margin-top: 30px;
+      color: lightgray;
+      white-space: pre-wrap;
+    }
+
+
+    ::selection {
+      background: white;
+      color: black;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="linha">
+    <span class="prompt">&gt;</span>
+    <label>
+      LOGIN: <input type="text" id="usuario" autofocus placeholder="">
+    </label>
+  </div>
+
+  <div class="linha">
+    <span class="prompt">&gt;</span>
+    <label>
+      SENHA: <input type="password" id="senha" placeholder="">
+    </label>
+  </div>
+
+  <div id="mensagem"></div>
+  <div id="recuperar" style="display: none; margin-top: 10px;">
+  <a href="./recuperar.html" style="color: lightblue; text-decoration: none;">>> ESQUECI MINHA SENHA</a>
+</div>
+
+
+  <script>
+    const usuarioInput = document.getElementById('usuario');
+    const senhaInput = document.getElementById('senha');
+    const mensagem = document.getElementById('mensagem');
+
+    senhaInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        const user = usuarioInput.value.trim();
+        const pass = senhaInput.value.trim();
+
+        if (user === 'bigode' && pass === '1234') {
+          mensagem.textContent = ">> LOGIN OK\n>> BEM-VINDO AO SISTEMA.";
+          mensagem.style.color = "lightgreen";
+        } else {
+          mensagem.textContent = ">> LOGIN FALHOU\n>> USUÁRIO OU SENHA INCORRETOS.";
+          mensagem.style.color = "red";
+          document.getElementById('recuperar').style.display = 'block';
+        }
+      }
+    });
+
+    usuarioInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        senhaInput.focus();
+      }
+    });
+  </script>
+
+</body>
+</html>
