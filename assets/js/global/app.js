@@ -24,7 +24,12 @@ export async function navigate(page) {
 
   const script = document.createElement("script");
   script.type = "module";
-  script.src = route.js;
+  script.src = `${route.js}?v=${Date.now()}`; // força reload
   script.id = "page-script"; // id pra controlar script carregado
+
+    // Espera o HTML estar montado antes de executar o script
+  script.onload = () => console.log(`${route.js} carregado com sucesso!`);
+  script.onerror = (e) => console.error(`Erro ao carregar ${route.js}`, e);
+
   document.body.appendChild(script);
 }

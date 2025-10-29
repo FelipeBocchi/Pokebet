@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Recuperar Senha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .linha {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .prompt {
+      margin-right: 10px;
+      white-space: nowrap;
+    }
+    input {
+      background: black;
+      border: none;
+      border-bottom: 1px solid white;
+      color: white;
+      font-family: inherit;
+      font-size: inherit;
+      outline: none;
+      width: 250px;
+      padding: 4px 2px;
+    }
+    #mensagem {
+      margin-top: 30px;
+      color: lightgray;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="linha">
+    <span class="prompt">&gt;</span>
+    <label>
+      DIGITE SEU EMAIL: <input type="email" id="email" autofocus>
+    </label>
+  </div>
+
+  <div id="mensagem"></div>
+
+  <script>
+    const emailInput = document.getElementById('email');
+    const mensagem = document.getElementById('mensagem');
+
+    emailInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        const email = emailInput.value.trim();
+
+        if (email.length > 5 && email.includes("@")) {
+          mensagem.textContent = ">> EMAIL ENVIADO\n>> INSIRA O CÓDIGO DE VERIFICAÇÃO.";
+          mensagem.style.color = "lightgreen";
+          setTimeout(() => {
+            window.location.href = "verificar.html";
+          }, 2000);
+        } else {
+          mensagem.textContent = ">> EMAIL INVÁLIDO.";
+          mensagem.style.color = "red";
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

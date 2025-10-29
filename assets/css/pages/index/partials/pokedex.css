@@ -77,3 +77,49 @@
 #btn_Seta_Esquerda{
     transform: rotate(180deg);
 }
+
+
+/* --- Loader de pokébolas --- */
+.loader-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  padding: 10px;
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff3b3b, #c70000);
+  position: relative;
+  overflow: hidden;
+  animation: spin 1.2s linear infinite;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.loader::before {
+  top: 50%;
+  height: 50%;
+  background: white;
+}
+
+.loader::after {
+  top: calc(50% - 4px);
+  height: 8px;
+  background: black;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,8 +1,11 @@
+@import url(./../variaveis/variaveis.css);
+
 *{
     margin: 0px;
     padding: 0px;
     text-decoration: none;
     overflow: hidden;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 }
 
 #div_Moldura_Site{
