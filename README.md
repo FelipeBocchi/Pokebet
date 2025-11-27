@@ -10,6 +10,8 @@ Projeto da faculdade Uniamerica com o objetivo de criar um Pokédex online.
 
 ## 📂 Estrutura
 - `assets/css/` → estilos
+    `assets/css/global` → estilo global do projeto
+    `assets/css/pages` → estilo de cada parte do projeto
 - `assets/js/` → scripts
 - `assets/img/` → imagens
 

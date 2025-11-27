@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <title>Game CMD - Início</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* ajustes finos do botão (em % relativos à imagem) */
+      --btn-left: 50%;    
+      --btn-top: 70%;    
+      --btn-w: 18%;      
+      --btn-h: 10%;       
+      --zoom-scale: 3;   
+      --zoom-duration: 1000ms; 
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:#000;font-family:'Press Start 2P',monospace;color:#fff}
+
+    /* container full screen com a imagem cobrindo tudo */
+    .stage{
+      position:relative;
+      width:100vw;
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      perspective:1200px;
+      background:#000;
+    }
+
+    .console-wrap{
+      position:relative;
+      width:90vmin;            /* mantém proporção e cabe em telas */
+      height: calc(90vmin * 1.5); /* ajuste proporção da imagem (usar conforme sua imagem) */
+      max-width:1200px;
+      max-height:1800px;
+      transition: transform var(--zoom-duration) cubic-bezier(.2,.9,.2,1);
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    /* imagem cobre todo o container do console */
+    .console-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      pointer-events:none; /* evita clicar na própria imagem */
+      user-select:none;
+    }
+
+    /* botão posicionado sobre o retângulo verde - usa % pra ficar responsivo */
+    .login-btn{
+      position:absolute;
+      left: var(--btn-left);
+      top: var(--btn-top);
+      transform: translate(-50%, -50%);
+      width: var(--btn-w);
+      height: var(--btn-h);
+      min-width:90px;
+      min-height:36px;
+      background:#28a745;
+      border:4px solid #0f380f;
+      color:#04130a;
+      font-size:12px;
+      text-transform:uppercase;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:20;
+      border-radius:6px;
+      transition: transform .12s ease, filter .12s;
+      box-shadow: 0 8px 24px rgba(0,0,0,.6);
+      font-family:inherit;
+    }
+
+    .login-btn:active{ transform: translate(-50%,-50%) scale(.96) }
+    .login-btn:hover{ filter:brightness(1.06); transform: translate(-50%,-50%) scale(1.03) }
+
+    /* máscara para efeito de desligamento/flash (opcional) */
+    .flash {
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+      mix-blend-mode:screen;
+      opacity:0;
+      transition:opacity .25s ease;
+      z-index:30;
+    }
+
+    .zooming .flash { opacity:1; transition:opacity .6s ease; }
+
+    /* quando zoom ativo, desativa pointer events dos controles */
+    .zooming .login-btn { pointer-events:none; }
+
+    /* texto fallback para telas muito pequenas */
+    @media (max-width:520px){
+      .console-wrap{ width:100vw; height:150vw; }
+      :root{ --btn-w:28%; --btn-h:12%; --btn-top:72% }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <div class="console-wrap" id="console">
+      <img src="./../assets/img/img_Login.jpeg" alt="Game CMD Console">
+      <!-- botão posicionado exatamente sobre o retângulo verde (fine-tune via CSS vars) -->
+      <button id="loginBtn" class="login-btn">LOGIN</button>
+      <div class="flash" id="flash"></div>
+    </div>
+  </div>
+
+  <!-- som de clique opcional: coloca click.wav na pasta -->
+  <audio id="clickSound" src="click.wav" preload="auto"></audio>
+
+  <script>
+    (function(){
+      const consoleWrap = document.getElementById('console');
+      const loginBtn = document.getElementById('loginBtn');
+      const stage = document.getElementById('stage');
+      const clickSound = document.getElementById('clickSound');
+
+      // tempo total da animação (em ms) - manter coerente com CSS var
+      const ZOOM_MS = 1000;
+
+      function playClick(){
+        if(!clickSound) return;
+        clickSound.currentTime = 0;
+        clickSound.volume = 0.7;
+        clickSound.play().catch(()=>{/* autoplay bloqueado ou sem arquivo - ignora */});
+      }
+
+      loginBtn.addEventListener('click', (e) => {
+        playClick();
+
+        // cálculo do deslocamento necessário pra levar o centro do botão ao centro da viewport
+        const wrapRect = consoleWrap.getBoundingClientRect();
+        const btnRect = loginBtn.getBoundingClientRect();
+        const stageRect = stage.getBoundingClientRect();
+
+        // centro do botão relativo ao consoleWrap
+        const btnCenterX = btnRect.left + btnRect.width/2;
+        const btnCenterY = btnRect.top + btnRect.height/2;
+
+        // centro da viewport (stage)
+        const viewportCenterX = stageRect.left + stageRect.width/2;
+        const viewportCenterY = stageRect.top + stageRect.height/2;
+
+        // deslocamento em px que precisamos aplicar ao container para centralizar o botão
+        const dx = btnCenterX - viewportCenterX;
+        const dy = btnCenterY - viewportCenterY;
+
+        // valor de escala (coerente com CSS var --zoom-scale)
+        const styleRoot = getComputedStyle(document.documentElement);
+        const scale = parseFloat(styleRoot.getPropertyValue('--zoom-scale')) || 3;
+
+        // aplica classe pra indicar zoom em andamento (usa pra estilos complementares)
+        document.documentElement.classList.add('zooming');
+
+        // aplicar transform: translate(-dx, -dy) scale(scale)
+        // usamos translate em px para ser exato e não depender da proporção
+        consoleWrap.style.transition = `transform ${ZOOM_MS}ms cubic-bezier(.2,.9,.2,1)`;
+        // pequena rotação Z pra dar sensação 3D? (opcional, removi para fidelidade)
+        consoleWrap.style.transform = `translate(${-dx}px, ${-dy}px) scale(${scale})`;
+
+        // após a transição terminar, fazemos um micro flash e redirecionamos pra intro
+        let done = false;
+        function finish() {
+          if(done) return;
+          done = true;
+          // flash rápido pra simular desligar/ligar
+          document.getElementById('flash').style.transition = 'opacity 180ms ease';
+          document.getElementById('flash').style.opacity = '1';
+          setTimeout(()=>{
+            // leva pro intro.html
+            window.location.href = 'intro.html';
+          }, 160);
+        }
+
+        // tenta ouvir o evento transitionend, com fallback timeout
+        const onEnd = (ev) => {
+          if(ev && ev.target !== consoleWrap) return;
+          consoleWrap.removeEventListener('transitionend', onEnd);
+          finish();
+        };
+        consoleWrap.addEventListener('transitionend', onEnd);
+
+        // fallback: se por algum motivo não disparar, cai daqui
+        setTimeout(finish, ZOOM_MS + 200);
+      });
+    })();
+  </script>
+</body>
+</html>

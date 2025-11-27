@@ -1,4 +1,5 @@
 import { getPokemon } from "../../global/api.js";
+import { valida } from "./moldura.js";
 
 const input_Geracoes = document.querySelector("#input_Geracoes")
 const input_Pesquisar = document.querySelector("#input_Pesquisar")
@@ -9,7 +10,7 @@ const div_Pokemons = document.querySelector("#div_Pokemons")
 
 const MAX = 32;
 let array_Pokemon = [];
-let start = 1;          // primeiro Pokémon do range             
+let start = 1;          // primeiro Pokémon do range 
 let max_Pokemon = MAX;
 
 // preenche o array com os pokémons
@@ -30,36 +31,52 @@ const preencre_Array_Pokemons = async () => {
 
 // renderiza os pokémons na tela
 const preencre_Tela_Pokemons = async () => {
-  p_numeros_Pokemons.innerHTML = `00${start} - 0${max_Pokemon}`  //arrumar a lógica dos zeros!!!
+  p_numeros_Pokemons.textContent = `00${start} - 0${max_Pokemon}`;
 
-  await preencre_Array_Pokemons(); // ✅ agora espera terminar
+  // --- mostra o loader enquanto carrega ---
+  div_Pokemons.innerHTML = `
+    <div class="loader-container">
+      ${Array.from({ length: MAX })
+        .map(() => '<div class="loader"></div>')
+        .join("")}
+    </div>
+  `;
 
-  // - Função para limpar o campo de pokemons
-  div_Pokemons.innerHTML = ''
+  // --- busca pokémons em paralelo ---
+  await preencre_Array_Pokemons();
+
+  // --- renderiza tudo de uma vez ---
+  const fragment = document.createDocumentFragment();
 
   array_Pokemon.forEach((p) => {
     const div_Do_Pokemon = document.createElement("div");
     div_Do_Pokemon.classList.add("div_Do_Pokemon");
 
     const article = document.createElement("article");
-
-    // pega sprite ou fallback
     const imgSrc = p.sprites?.front_default || "placeholder.png";
 
-    article.innerHTML = `
-      <img src="${imgSrc}" alt="${p.name}">
-      
-    `; //<p>${p.name}</p>
+    article.innerHTML = `<img src="${imgSrc}" alt="${p.name}">`;
+
+    article.addEventListener("click", () => {
+      sessionStorage.setItem("click", 1);
+      sessionStorage.setItem("pokemon", p.id);
+      valida();
+    });
 
     div_Do_Pokemon.appendChild(article);
-    div_Pokemons.appendChild(div_Do_Pokemon);
+    fragment.appendChild(div_Do_Pokemon);
   });
+
+  // --- troca o loader pelo conteúdo real ---
+  div_Pokemons.innerHTML = "";
+  div_Pokemons.appendChild(fragment);
 };
 
-// - Chama a função pela primeira vez para preencher a página
-//document.addEventListener("DOMContentLoaded", ()=>{
-  preencre_Tela_Pokemons();
-//})
+
+
+
+   preencre_Tela_Pokemons();
+
 
 
 
@@ -68,8 +85,9 @@ btn_Seta_Direita.addEventListener("click", ()=>{
   // prepara para próxima "página"
   start = max_Pokemon + 1;
   max_Pokemon+=MAX;
-
+  
   preencre_Tela_Pokemons();
+ 
 })
 
 // - Botão para passar os Pokemons diminuindo o indice
@@ -127,6 +145,24 @@ input_Geracoes.addEventListener("change", ()=>{
           preencre_Tela_Pokemons();
           break;
 
+        case 6:
+          start = 650;
+          max_Pokemon = start + (MAX - 1);
+          preencre_Tela_Pokemons();
+          break;
+
+        case 7:
+          start = 722;
+          max_Pokemon = start + (MAX - 1);
+          preencre_Tela_Pokemons();
+          break;
+
+        case 8:
+          start = 810;
+          max_Pokemon = start + (MAX - 1);
+          preencre_Tela_Pokemons();
+          break;
+
         default:
           break;
       }
@@ -134,3 +170,17 @@ input_Geracoes.addEventListener("change", ()=>{
   })
 
 
+  input_Pesquisar.addEventListener("change", ()=>{
+    let pokemon_Pesquisado = input_Pesquisar.value;
+
+    if(pokemon_Pesquisado <= 1025 || typeof pokemon_Pesquisado === "string")
+    {
+      sessionStorage.setItem("click", 1);
+      sessionStorage.setItem("pokemon", pokemon_Pesquisado);
+      valida();
+    }else
+    {
+      alert("Número de Pokémon pesquisado não existe");
+    }
+
+  })

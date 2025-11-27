@@ -1,8 +1,11 @@
+@import url(./../variaveis/variaveis.css);
+
 *{
     margin: 0px;
     padding: 0px;
     text-decoration: none;
     overflow: hidden;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 }
 
 #div_Moldura_Site{
@@ -68,4 +71,99 @@
 .bola_Moldura{
     width: 20px;
     height: 20px;
+}
+
+/*================================*/
+/*  - Nav bar - */
+#div_Nav_Moldura{
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 16%;
+  background-color: red;
+  z-index: 10;
+  transform: translateX(100%); /* começa fora da tela */
+  transition: transform 0.3s ease;
+
+    border-radius: 16px 0px 0px 16px;
+}
+
+#nav_Nav_Moldura{
+    display: flex;
+    justify-content: start;
+
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#ul_Nav_Moldura{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    z-index: 10;
+}
+
+#div_Fosco_Conteudo{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  opacity: 0;                /* começa invisível */
+  pointer-events: none;      /* não intercepta cliques */
+  transition: opacity 0.3s ease;
+  z-index: 9;
+
+}
+#div_Fosco_Conteudo.ativo {
+    opacity: 0.6;                /* aparece */
+    pointer-events: all;
+}
+
+#div_Nav_Moldura.ativar_Nav {
+  transform: translateX(0); /* entra na tela */
+}
+
+.li_Btn_NavBar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: 250px;
+
+    padding: 4px;
+
+    border-radius: 8px;
+
+}
+.li_Btn_NavBar:hover{
+    transition: transform 0.5s linear;
+
+    height: 42px;
+    width: 255px;
+
+    background-color: rgb(255, 102, 102);
+    color: white;
+}
+
+.icons_li_NavBar{
+    
+}
+
+/*  - icon navbar  - */
+#div_Icon_NavBar{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    padding: 4px;
+}
+
+#icon_NavBar{
+    height: 40px;
+    width: 40px;
+
+    margin-right: 4px;
 }
