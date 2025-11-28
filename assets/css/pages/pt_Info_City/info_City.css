@@ -3,6 +3,8 @@
     position: absolute;
     top: 100px;
     left: 6%;
+    font-size: 0.75rem;
+    font-family: 'Press Start 2P', monospace;
 }
 
 #section_Right_Info_City{
@@ -11,6 +13,8 @@
     right: 6%;
 
     width: 44%;
+    font-size: 0.75rem;
+    font-family: 'Press Start 2P', monospace;
 }
 
 /*============================*/
@@ -82,7 +86,7 @@
     height: 30px;
 
     border-radius: 16px;
-
+    font-size: 1rem;
     background-color: #797E8A;
 }
 
@@ -110,12 +114,14 @@
 
     color: #000;
 
-    height: 50px;
+    height: auto;
 
-    padding: 8px    ;
+    padding: 8px 8px;
 
     border-radius: 16px;
-
+    line-height: 1.5;
+    font-size: 0.75rem;
+    font-family: 'Press Start 2P', monospace;
     background-color: #F7F1E7;
 }
 

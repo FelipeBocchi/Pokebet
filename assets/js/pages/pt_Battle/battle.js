@@ -242,7 +242,7 @@ async function playerAttack(moveData, attackerId) {
   if (turn == 1){
       applyDamage(
         pokemon2,
-        { current: currentHP2, max: maxHP2, barId: "hp_bar_2" },
+        { current: currentHP2, max: maxHP2, barId: "hp_inner_2" },
         moveData,
         "pokemon_Battle_2",
         hp_text_2
@@ -256,7 +256,7 @@ async function playerAttack(moveData, attackerId) {
   }else{
       applyDamage(
         pokemon1,
-        { current: currentHP1, max: maxHP1, barId: "hp_bar_1" },
+        { current: currentHP1, max: maxHP1, barId: "hp_inner_1" },
         moveData,
         "pokemon_Battle_1",
         hp_text_1

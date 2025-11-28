@@ -8,7 +8,7 @@
     height: 100px;
 
     box-shadow: 4px 2px 0px 0px rgba(191,191,191,1);
-
+    font-family: 'Press Start 2P', monospace; 
     background-color: #E5E5E5;
 }
 
@@ -33,7 +33,7 @@
     height: 100px;
 
     box-shadow: 4px 2px 0px 0px rgba(191,191,191,1);
-
+    font-family: 'Press Start 2P', monospace;
     background-color:#E5E5E5;
 }
 
@@ -43,6 +43,7 @@
     position: absolute;
     top: 2%;
     left: 5%;
+    font-size: 0.75rem;
 }
 
 #attacks_Pokemon_Battle_1{
@@ -63,6 +64,7 @@
     position: absolute;
     bottom: 2%;
     right: 5%;
+    font-size: 0.75rem;
 }
 
 #attacks_Pokemon_Battle_2{
@@ -129,24 +131,28 @@
     position: absolute;
     top: 10%;
     left: 10%;
+    font-size: 1rem;
 }
 
 #nome_Pokemon_Bettle_2{
     position: absolute;
     top: 10%;
     left: 10%;
+    font-size: 1rem;
 }
 
 #hp_text_1{
     position: absolute;
     bottom: 10%;
     right: 10%;
+    font-size: 0.75rem;
 }
 
 #hp_text_2{
     position: absolute;
     bottom: 10%;
     right: 10%;
+    font-size: 0.75rem;
 }
 
 /*======================================*/
@@ -176,7 +182,7 @@
 /*  - botões de ataque*/
 /* estilo dos botões */
 .btn_Attack_Battle {
-    font-family: 'Press Start 2P', monospace; /* estilo retrô */
+    font-family: 'Press Start 2P', monospace; 
     position: relative;
     cursor: pointer;
     transition: background 0.2s;
